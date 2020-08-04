@@ -14,13 +14,13 @@ const http = require("http");
 const router = express.Router();
 
 // デフォルトルーティング
-router.get('/back1', function (request, response) {
+router.get('/disabled', function (request, response) {
 	response.send('{"param1":"hello","param2":"back1hohohohohohoh"}');
 });
 
 
 // デフォルトルーティング
-router.get('/back1__test', function (request, response) {
+router.get('/back1', function (request, response) {
 	let totalrr = {};
 	totalrr.restdb = {};
 	totalrr.restdb.body = '';
