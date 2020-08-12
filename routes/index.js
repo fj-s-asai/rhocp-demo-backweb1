@@ -18,14 +18,14 @@ const router = express.Router();
  *	search title data
  *	-------------------------------------------------------------------------*/	
 router.get('/back1_title', function (request, response) {
-    find("/api/demo?category1=summer&category2=title");
+    find("/api/demo?category1=winter&category2=title");
 });
 
 /*	--------------------------------------------------------------------------/
  *	search content data
  *	-------------------------------------------------------------------------*/	
 router.get('/back1_contents', function (request, response) {
-	find("/api/demo?category1=summer&category2=contents");
+	find("/api/demo?category1=winter&category2=contents");
 });
 
 
