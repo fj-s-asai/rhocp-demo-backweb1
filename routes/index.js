@@ -18,7 +18,7 @@ router.get('/back1_title', function (request, response) {
 
   let tmp1={},tmp2={},tmp3 = {};
   let obj = {};
-  let obj1.json =[tmp1,tmp2,tmp3];
+  obj.json =[tmp1,tmp2,tmp3];
   tmp1.id = "11";
   tmp1.image = "beautiful-2576840_1920.jpg";
   tmp1.headline = "アウトドアをもっと手軽・快適に";
@@ -41,7 +41,7 @@ router.get('/back1_contents', function (request, response) {
 
   let tmp1={},tmp2={},tmp3={},tmp4={};
   let obj = {};
-  let obj1.json =[tmp1,tmp2,tmp3,tmp4];
+  obj.json =[tmp1,tmp2,tmp3,tmp4];
   tmp1.id = "21";
   tmp1.image = "blue-2564660_1920.jpg";
   tmp1.headline = "アウトドアスタイル";
@@ -61,6 +61,7 @@ router.get('/back1_contents', function (request, response) {
   tmp4.image = "sunset-1282282_1920.jpg";
   tmp4.headline = "夏の特別コレクション";
   tmp4.sub_headline = "より快適に、より心地よいライフスタイルを";
+  response.send(JSON.stringify(obj));
 });
 
 
