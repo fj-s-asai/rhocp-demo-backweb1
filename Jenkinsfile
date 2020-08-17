@@ -23,7 +23,6 @@ pipeline {
             openshift.withProject() {
               echo "Build Appliction Image: backweb1"
               def bc = openshift.selector("bc", "backweb1-v10")
-              def bc = openshift.selector("bc", "backweb1-v11")
               bc.startBuild().logs("-f")
               def bb = bc.narrow("bc").related("builds")
               timeout(10) {
