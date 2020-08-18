@@ -18,21 +18,21 @@ const router = express.Router();
  *	search title data
  *	-------------------------------------------------------------------------*/	
 router.get('/back1_title', function (request, response) {
-    find("/api/demo?category1=winter&category2=title");
+    find(request, response,"/api/demo?category1=winter&category2=title");
 });
 
 /*	--------------------------------------------------------------------------/
  *	search content data
  *	-------------------------------------------------------------------------*/	
 router.get('/back1_contents', function (request, response) {
-	find("/api/demo?category1=winter&category2=contents");
+	find(request, response,"/api/demo?category1=winter&category2=contents");
 });
 
 
 /*	--------------------------------------------------------------------------/
  *	common : find
  *	-------------------------------------------------------------------------*/	
-function find(url) {
+function find(request,response,url) {
 	let totalrr = {};
 	totalrr.restdb = {};
 	
@@ -59,6 +59,7 @@ function find(url) {
               rr.status = res.statusCode;
               res.setEncoding("utf-8");
               res.on("data",(chunk) => {
+                  console.log(chunk);
                   body += chunk;
               });
               res.on("end",(chunk)=>{
@@ -80,7 +81,7 @@ function find(url) {
 			resolve("render complete");
 		});
 	}
-});
+}
 
 
 module.exports = router;
