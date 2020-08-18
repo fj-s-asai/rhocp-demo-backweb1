@@ -59,6 +59,7 @@ function find(request,response,url) {
               rr.status = res.statusCode;
               res.setEncoding("utf-8");
               res.on("data",(chunk) => {
+                  console.log(chunk);
                   body += chunk;
               });
               res.on("end",(chunk)=>{
