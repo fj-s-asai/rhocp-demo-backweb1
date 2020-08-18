@@ -18,21 +18,21 @@ const router = express.Router();
  *	search title data
  *	-------------------------------------------------------------------------*/	
 router.get('/back1_title', function (request, response) {
-    find("/api/demo?category1=summer&category2=title");
+    find(request, response,"/api/demo?category1=summer&category2=title");
 });
 
 /*	--------------------------------------------------------------------------/
  *	search content data
  *	-------------------------------------------------------------------------*/	
 router.get('/back1_contents', function (request, response) {
-	find("/api/demo?category1=summer&category2=contents");
+	find(request, response,"/api/demo?category1=summer&category2=contents");
 });
 
 
 /*	--------------------------------------------------------------------------/
  *	common : find
  *	-------------------------------------------------------------------------*/	
-function find(url) {
+function find(request,response,url) {
 	let totalrr = {};
 	totalrr.restdb = {};
 	
