@@ -80,7 +80,7 @@ function find(url) {
 			resolve("render complete");
 		});
 	}
-});
+}
 
 
 module.exports = router;
