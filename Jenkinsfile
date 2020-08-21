@@ -35,13 +35,14 @@ pipeline {
         }
       }
     }
-    stage("create tag") {
+    stage('deploy') {
       steps {
         script {
           openshift.withCluster() {
             openshift.withProject() {
-              echo "Create Tag Image: backweb1"
-              openshift.tag("backweb1:1.0", "backweb1:1.1")
+              sh "oc rollout restart deployment/backweb1-v10"
+                timeout(10) {
+              }
             }
           }
         }
