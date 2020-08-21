@@ -21,7 +21,7 @@ router.get('/back1_title', function (request, response) {
   obj.json =[tmp1,tmp2,tmp3];
   tmp1.id = "11";
   tmp1.image = "beautiful-2576840_1920.jpg";
-  tmp1.headline = "アウトドアをもっと手軽・快適に!!!";
+  tmp1.headline = "アウトドアをもっと手軽・快適に";
   tmp1.sub_headline = "気軽にエレガント　気軽に洗える";
 
   tmp2.id = "12";
