@@ -15,73 +15,118 @@ const router = express.Router();
 
 
 /*	--------------------------------------------------------------------------/
- *	search title data
+ *	
  *	-------------------------------------------------------------------------*/	
-router.get('/back1_title', function (request, response) {
-    find(request, response,"/api/demo?category1=summer&category2=title");
-});
+router.get("/back1",function(request,response) {
+  
+  
+  let totalrr = {};
+  totalrr.title = {};
+  totalrr.contents = {};
+  
+  serial();
+  /*	---------------------------------------------------------------------/
+   *	promise : serial
+   *	--------------------------------------------------------------------*/
+  function serial () {
+      let promise = Promise.resolve();
+      promise
+          .then(call_title.bind(this,totalrr))
+          .then(call_contents.bind(this,totalrr))
+          .then(send_data);
+  }
+  
+  
+  
+  /*	---------------------------------------------------------------------/
+   *	promise : parallel
+   *	--------------------------------------------------------------------*/
+  function parallel () {
+      let promise = Promise.resolve();
 
-/*	--------------------------------------------------------------------------/
- *	search content data
- *	-------------------------------------------------------------------------*/	
-router.get('/back1_contents', function (request, response) {
-	find(request, response,"/api/demo?category1=summer&category2=contents");
-});
+      function pp() {
+          return Promise.all([
+              call_title(totalrr),
+              call_contents(totalrr)
+          ]);
+      }
 
-
-/*	--------------------------------------------------------------------------/
- *	common : find
- *	-------------------------------------------------------------------------*/	
-function find(request,response,url) {
-	let totalrr = {};
-	totalrr.restdb = {};
-	
-	let promise = Promise.resolve();
-	promise
-		.then(call_restdb)
-		.then(send_data);
-
-	function call_restdb() {
-		return new Promise((resolve,reject) => {
-          var options = {
-              protocol: "http:",
-              host: "restdb",
-              port: 8080,
-              path: url,
-              method: "GET"
-          };
-          let rr = {};  
-          rr.status = ''; 
-          rr.body =  'Service restdb Unavailable';
-          totalrr.restdb = rr;
-          const req = http.request(options,(res)=>{
-              let body = '';
-              rr.status = res.statusCode;
-              res.setEncoding("utf-8");
-              res.on("data",(chunk) => {
-                  console.log(chunk);
-                  body += chunk;
-              });
-              res.on("end",(chunk)=>{
-                  rr.body = body;
-                  resolve(rr);
-              });
+      promise
+          .then(pp)
+          .then(send_data);
+  }
+  
+  /*	---------------------------------------------------------------------/
+   *	promise:function():call_title
+   *	--------------------------------------------------------------------*/
+  function call_title(totalrr) {
+      return new Promise((resolve,reject) => {
+          let url = "/api/demo?category1=summer&category2=title";
+          totalrr.title.status = '';
+          totalrr.title.body = 'Service restdb Unavailable';;
+          _call_restdb(resolve,reject,url,totalrr.title);
+      });
+  }
+  
+  /*	---------------------------------------------------------------------/
+   *	promise:function():call_contents
+   *	--------------------------------------------------------------------*/
+  function call_contents(totalrr) {
+      return new Promise((resolve,reject) => {
+          let url = "/api/demo?category1=summer&category2=contents";
+          totalrr.contents.status = '';
+          totalrr.contents.body = 'Service restdb Unavailable';;
+          _call_restdb(resolve,reject,url,totalrr.contents);
+      });
+  }
+  
+  
+  
+  
+  
+  /*	---------------------------------------------------------------------/
+   *	promise : _call_restdb
+   *	--------------------------------------------------------------------*/
+  function _call_restdb(resolve,reject,url,rr) {
+     var options = {
+          protocol: "http:",
+          host: "restdb",
+          port: 8080,
+          path: url,
+          method: "GET"
+      };
+      const req = http.request(options,(res)=>{
+          let body = '';
+          rr.status = res.statusCode;
+          res.setEncoding("utf-8");
+          res.on("data",(chunk) => {
+              console.log(chunk);
+              body += chunk;
           });
-          req.on('error',(error) => {
-              console.log(error.message);
+          res.on("end",(chunk)=>{
+              rr.body = body;
               resolve(rr);
           });
-          req.end();
       });
+      req.on('error',(error) => {
+          console.log(error.message);
+          resolve(rr);
+      });
+      req.end();
 	}
-	
-	function send_data() {
-		return new Promise((resolve,reject) => {
-			response.send(totalrr.restdb.body);
-			resolve("render complete");
-		});
-	}
-}
+  
+  /*	---------------------------------------------------------------------/
+   *	promise : _call_restdb
+   *	--------------------------------------------------------------------*/
+  function send_data() {
+      return new Promise((resolve,reject) => {
+          response.send(JSON.stringify(totalrr));
+          resolve("render complete");
+      });
+  }
+  
+  
+});
 
 
 module.exports = router;
