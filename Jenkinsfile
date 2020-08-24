@@ -41,7 +41,7 @@ pipeline {
           openshift.withCluster() {
             openshift.withProject() {
               sh "oc rollout restart deployment/backweb1-v10"
-                timeout(10) {
+                timeout(5) {
               }
             }
           }
