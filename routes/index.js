@@ -104,7 +104,7 @@ router.get("/back1",function(request,response) {
               body += chunk;
           });
           res.on("end",(chunk)=>{
-              rr.body = body;
+              rr.body = JSON.parse(body);
               resolve(rr);
           });
       });
