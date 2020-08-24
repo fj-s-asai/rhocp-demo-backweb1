@@ -67,7 +67,7 @@ router.get('/back1', function (request, response) {
   tmp24.sub_headline = "より快適に、より心地よいライフスタイルを";
   totalrr.contents ={};
   totalrr.contents.status = ''
-  totalrr.contents.body = obj1;
+  totalrr.contents.body = obj2;
   
   response.send(JSON.stringify(totalrr));
   
