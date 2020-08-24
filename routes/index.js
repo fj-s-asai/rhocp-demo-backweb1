@@ -100,7 +100,7 @@ router.get("/back1",function(request,response) {
           rr.status = res.statusCode;
           res.setEncoding("utf-8");
           res.on("data",(chunk) => {
-              console.log(chunk);
+              //console.log(chunk);
               body += chunk;
           });
           res.on("end",(chunk)=>{
@@ -120,6 +120,8 @@ router.get("/back1",function(request,response) {
    *	--------------------------------------------------------------------*/
   function send_data() {
       return new Promise((resolve,reject) => {
+        
+          console.log(JSON.stringify(totalrr));
           response.send(JSON.stringify(totalrr));
           resolve("render complete");
       });
