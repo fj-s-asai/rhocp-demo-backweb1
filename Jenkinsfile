@@ -21,7 +21,7 @@ pipeline {
         script {
           openshift.withCluster() {
             openshift.withProject() {
-              echo "Build Appliction Image: backweb2"
+              echo "Build Appliction Image: backweb1"
               def bc = openshift.selector("bc", "backweb1-v11")
               bc.startBuild().logs("-f")
               def bb = bc.narrow("bc").related("builds")
