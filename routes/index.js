@@ -36,7 +36,9 @@ router.get('/back1', function (request, response) {
   tmp13.image = "fashion-2766734_1920.jpg";
   tmp13.headline = "そのまま街へでかけよう";
   tmp13.sub_headline = "夏のスタイルは思いのままに";
-  totalrr.title = obj1;
+  totalrr.title ={};
+  totalrr.title.status = ''
+  totalrr.title.body = obj1;
   
   
   
@@ -63,7 +65,9 @@ router.get('/back1', function (request, response) {
   tmp24.image = "sunset-1282282_1920.jpg";
   tmp24.headline = "夏の特別コレクション";
   tmp24.sub_headline = "より快適に、より心地よいライフスタイルを";
-  totalrr.contents = obj2;
+  totalrr.contents ={};
+  totalrr.contents.status = ''
+  totalrr.contents.body = obj1;
   
   response.send(JSON.stringify(totalrr));
   
